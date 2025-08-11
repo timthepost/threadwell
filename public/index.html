@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <title>Ops Center</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css"
+    >
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/dark.css"
+    >
+    <link rel="stylesheet" href="./css/style.css">
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"
+    ></script>
+    <!-- Shoelace doesn't typically need SRI for its autoloader but ensure its main files do if loaded separately -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.2/Sortable.min.js"
+      integrity="sha512-TelkP3PCMJv+viMWynjKcvLsQzx6dJHvIGhfqzFtZKgAjKM1YPqcwzzDEoTc/BHjf43PcPzTQOjuTr4YdE8lNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <header
+        class="app-header"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem"
+      >
+        <!-- Group 1: H1, aligned to the left -->
+        <div style="display: flex; align-items: center">
+          <sl-icon-button
+            id="hamburger-menu"
+            name="list"
+            label="Menu"
+            style="font-size: 1.5rem; margin-right: 0.5rem"
+          ></sl-icon-button>
+          <h1>Board Name</h1>
+        </div>
+
+        <!-- Group 2: All controls aligned to the right -->
+        <div id="main-header-controls" style="display: flex; align-items: center; gap: 1rem">
+          <!-- Add List Form -->
+          <div id="add-list-form-container" style="display: flex; align-items: center; gap: 0.5rem">
+            <sl-input id="new-list-name" placeholder="Column Name" clearable></sl-input>
+            <sl-button id="add-list-button" variant="primary">Add Column</sl-button>
+          </div>
+          <!-- Board Switcher / Combo Search -->
+          <sl-select id="goToBoard" placeholder="Go to board" clearable style="min-width: 220px">
+            <sl-input
+              slot="header"
+              placeholder="Search boards..."
+              id="boardSearchInput"
+              clearable
+              style="margin-bottom: var(--sl-spacing-x-small)"
+            ></sl-input>
+            <sl-option value="board1">Board 1: Project Alpha</sl-option>
+            <sl-option value="board2">Board 2: Marketing Campaign</sl-option>
+            <sl-option value="board3">Board 3: Development Sprint</sl-option> <sl-option value="board4"
+            >Board 4: Personal Tasks Q3</sl-option> <sl-option value="board5"
+            >Board 5: Client Onboarding</sl-option>
+          </sl-select>
+          <!-- Wrapper for right-side icons -->
+          <sl-tooltip content="Invite & Share">
+            <sl-icon-button
+              id="open-sharing-drawer-button"
+              name="person-plus"
+              label="Agent Controls"
+              style="font-size: 1.5rem"
+            ></sl-icon-button>
+          </sl-tooltip>
+          <sl-tooltip content="Board Settings">
+            <sl-icon-button
+              id="open-settings-drawer-button"
+              name="gear"
+              label="Board Settings"
+              style="font-size: 1.5rem; margin-right: 0"
+            ></sl-icon-button>
+          </sl-tooltip>
+          <sl-tooltip content="Theme Settings">
+            <sl-dropdown id="theme-selector-dropdown">
+              <sl-icon-button
+                slot="trigger"
+                name="palette"
+                label="Change Theme"
+                style="font-size: 1.5rem"
+              ></sl-icon-button>
+              <sl-menu id="theme-menu">
+                <sl-menu-item type="checkbox" value="light">
+                  <sl-icon slot="prefix" name="sun-fill"></sl-icon>
+                  Light
+                </sl-menu-item>
+                <sl-menu-item type="checkbox" value="dark">
+                  <sl-icon slot="prefix" name="moon-fill"></sl-icon>
+                  Dark
+                </sl-menu-item>
+                <sl-menu-item type="checkbox" value="system">
+                  <!-- JS will handle initial 'checked' state -->
+                  <sl-icon slot="prefix" name="display"></sl-icon>
+                  System
+                </sl-menu-item>
+              </sl-menu>
+            </sl-dropdown>
+          </sl-tooltip>
+          <sl-tooltip content="Account">
+            <sl-dropdown id="account-selector-dropdown">
+              <sl-icon-button
+                slot="trigger"
+                name="person-circle"
+                label="Account &amp; Organization Settings"
+                style="font-size: 1.5rem"
+              ></sl-icon-button>
+              <sl-menu id="account-menu">
+                <sl-menu-item>Messages</sl-menu-item>
+                <sl-menu-item>Account Settings</sl-menu-item>
+                <sl-menu-item>Organization Settings</sl-menu-item>
+                <sl-divider></sl-divider>
+                <!-- Removed sl-menu-item wrapper for the select -->
+                <div
+                  style="padding: var(--sl-spacing-x-small) var(--sl-spacing-medium); display: flex; align-items: center"
+                >
+                  <sl-select placeholder="Select User To Become" id="user-selector" style="width: 100%">
+                    <sl-option value="1">System Admin User</sl-option>
+                    <sl-option value="2">Standard User</sl-option>
+                    <sl-option value="org-admin">Organization Admin</sl-option>
+                    <sl-option value="outside-agent">Outside Agent</sl-option>
+                  </sl-select>
+                </div>
+                <sl-divider></sl-divider>
+                <sl-menu-item>Sign Out</sl-menu-item>
+              </sl-menu>
+            </sl-dropdown>
+          </sl-tooltip>
+        </div>
+      </header>
+
+      <sl-drawer id="responsive-header-drawer" label="Menu" placement="start">
+        <div class="drawer-menu-container">
+          <sl-button id="drawer-add-column" class="drawer-menu-item" outline fullWidth>
+            <sl-icon slot="prefix" name="plus-square"></sl-icon>Add Column
+          </sl-button>
+          <sl-button id="drawer-go-to-board" class="drawer-menu-item" outline fullWidth>
+            <sl-icon slot="prefix" name="columns-gap"></sl-icon>Go to Board
+          </sl-button>
+          <sl-divider></sl-divider>
+          <sl-button id="drawer-invite-share" class="drawer-menu-item" outline fullWidth>
+            <sl-icon slot="prefix" name="person-plus"></sl-icon>Invite & Share
+          </sl-button>
+          <sl-button id="drawer-board-settings" class="drawer-menu-item" outline fullWidth>
+            <sl-icon slot="prefix" name="gear"></sl-icon>Board Settings
+          </sl-button>
+          <sl-divider></sl-divider>
+          <sl-button id="drawer-account-settings" class="drawer-menu-item" outline fullWidth>
+            <sl-icon slot="prefix" name="person-circle"></sl-icon>Account
+          </sl-button>
+          <!-- You can add more items and sl-dividers here -->
+        </div>
+      </sl-drawer>
+
+      <sl-drawer
+        id="sharing-drawer"
+        label="Manage Sharing"
+        placement="top"
+        class="controls-drawer"
+        style="--size: 15rem"
+      >
+        <div style="display: flex; flex-direction: row; gap: 1rem; padding: 1rem; height: auto">
+          <sl-input id="new-agent-list-name" placeholder="New agent name..."></sl-input>
+          <sl-button id="add-agent-list-button" variant="primary" style="width: 100%"
+          >Add Agent To Board</sl-button>
+
+          <sl-divider vertical></sl-divider>
+
+          <sl-input id="invite-teammate-name" placeholder="Teammate Email"></sl-input>
+          <sl-button id="invite-teammate-button" variant="primary" style="width: 100%"
+          >Invite Teammate To Board</sl-button>
+        </div>
+        <sl-button slot="footer" variant="neutral" id="close-sharing-drawer-button">Close</sl-button>
+      </sl-drawer>
+
+      <sl-drawer
+        id="settings-drawer"
+        label="Board Settings"
+        placement="top"
+        class="settings-drawer"
+        style="--size: 20rem"
+      >
+        <div class="settings-grid">
+          <div class="setting-item">
+            <sl-input label="Setting Alpha" placeholder="Enter value"></sl-input>
+          </div>
+          <div class="setting-item">
+            <sl-switch>Enable Beta Feature</sl-switch>
+          </div>
+          <div class="setting-item">
+            <sl-select label="Gamma Option" placeholder="Select one">
+              <sl-option value="1">Option 1</sl-option>
+              <sl-option value="2">Option 2</sl-option>
+            </sl-select>
+          </div>
+          <div class="setting-item">
+            <sl-range label="Delta Level" min="0" max="100" value="50"></sl-range>
+          </div>
+          <!-- Add more setting items as needed -->
+        </div>
+        <sl-button slot="footer" variant="neutral" id="close-settings-drawer-button">Close</sl-button>
+      </sl-drawer>
+
+      <div id="board-container" class="board">
+        <!-- Lists will be rendered here by JavaScript -->
+      </div>
+    </div>
+    <!-- Closing .container -->
+
+    <!-- Shoelace Dialog for adding/editing cards -->
+    <sl-dialog id="card-dialog" label="Card Details">
+      <sl-input id="card-title-input" label="Title" required></sl-input>
+      <br>
+      <sl-textarea id="card-description-input" label="Description" resize="auto"></sl-textarea>
+      <input type="hidden" id="card-id-input">
+      <input type="hidden" id="card-list-id-input">
+      <sl-button slot="footer" variant="neutral" id="cancel-card-button">Cancel</sl-button>
+      <sl-button slot="footer" variant="primary" id="save-card-button">Save Card</sl-button>
+    </sl-dialog>
+
+    <!-- Dialog for adding a new column from the responsive drawer -->
+    <sl-dialog id="drawer-add-column-dialog" label="Add New Column">
+      <sl-input id="drawer-new-column-name-input" label="Column Name" required></sl-input>
+      <sl-button slot="footer" variant="neutral" id="drawer-cancel-add-column-button">Cancel</sl-button>
+      <sl-button slot="footer" variant="primary" id="drawer-save-add-column-button">Add Column</sl-button>
+    </sl-dialog>
+
+    <!-- Placeholder dialog for "Go to Board" from drawer -->
+    <sl-dialog id="drawer-go-to-board-dialog" label="Go to Board">Select a board (placeholder).</sl-dialog>
+    <!-- App Assistant Chat Toggle Button -->
+    <div id="chat-toggle-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 650">
+      <sl-tooltip content="App Support">
+        <sl-icon-button
+          id="toggle-chat-button"
+          name="life-preserver"
+          label="App Support"
+          style="font-size: 2.2rem; --size: 3.5rem"
+        ></sl-icon-button>
+      </sl-tooltip>
+    </div>
+
+    <!-- App Assistant Chat Drawer -->
+    <sl-drawer id="chat-drawer" label="App Support" placement="end" class="chat-drawer">
+      <div class="chat-messages-container">
+        <!-- Mock messages will be populated here by JS or can be hardcoded for v0 -->
+        <div class="chat-message assistant-message">
+          <sl-avatar initials="AI" shape="circle"></sl-avatar>
+          <div class="message-content">Hello! How can I assist you with using this application today?</div>
+        </div>
+        <div class="chat-message user-message">
+          <div class="message-content">I'm looking to create a new agent.</div>
+          <sl-avatar initials="ME" shape="circle"></sl-avatar>
+        </div>
+        <div class="chat-message assistant-message">
+          <sl-avatar initials="AI" shape="circle"></sl-avatar>
+          <div class="message-content">
+            Great! You can use the "Agent Controls" drawer at the top of the page to add a new agent. What
+            would you like to name them?
+          </div>
+        </div>
+      </div>
+      <div slot="footer" class="chat-input-area">
+        <sl-textarea id="chat-input" placeholder="Type your message..." rows="1" resize="none"></sl-textarea>
+        <sl-icon-button id="send-chat-message-button" name="send" label="Send"></sl-icon-button>
+      </div>
+    </sl-drawer>
+
+    <script>
+      // JavaScript for filtering sl-select options (mock search)
+      document.addEventListener("DOMContentLoaded", () => {
+        const goToBoardSelect = document.getElementById("goToBoard");
+        const boardSearchInput = document.getElementById("boardSearchInput");
+
+        if (goToBoardSelect && boardSearchInput) {
+          const originalOptionElements = Array.from(goToBoardSelect.querySelectorAll("sl-option"))
+            .map((opt) => opt.cloneNode(true));
+
+          const updateDisplayedOptions = (searchTerm) => {
+            // Clear current sl-option elements from the select
+            Array.from(goToBoardSelect.querySelectorAll("sl-option")).forEach((opt) => opt.remove());
+
+            let hasVisibleOptions = false;
+            if (searchTerm) {
+              originalOptionElements.forEach((optionElement) => {
+                if (optionElement.textContent.toLowerCase().includes(searchTerm.toLowerCase())) {
+                  goToBoardSelect.appendChild(optionElement.cloneNode(true));
+                  hasVisibleOptions = true;
+                }
+              });
+              if (!hasVisibleOptions) {
+                const noResultsOption = document.createElement("sl-option");
+                noResultsOption.disabled = true;
+                noResultsOption.textContent = "No boards found";
+                goToBoardSelect.appendChild(noResultsOption);
+              }
+            } else { // No search term, display all original options or 'no boards' message
+              if (originalOptionElements.length > 0) {
+                originalOptionElements.forEach((optionElement) => {
+                  goToBoardSelect.appendChild(optionElement.cloneNode(true));
+                });
+              } else {
+                const emptyOption = document.createElement("sl-option");
+                emptyOption.disabled = true;
+                emptyOption.textContent = "No boards available";
+                goToBoardSelect.appendChild(emptyOption);
+              }
+            }
+          };
+          updateDisplayedOptions(""); // Initial population
+          boardSearchInput.addEventListener(
+            "sl-input",
+            (event) => updateDisplayedOptions(event.target.value),
+          );
+        }
+      });
+    </script>
+    <script type="module" src="./js/board.app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,320 @@
+/*  
+:root { 
+  --sl-input-color: #222; 
+  --sl-color-primary-600: #0052cc;  
+  --sl-color-neutral-600: #505f79; 
+}
+html.sl-theme-dark {
+   dark mode stuff here 
+}
+*/
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0; /* Reset default margin */
+  padding: 0; /* Reset default padding */
+  background-color: var(
+    --sl-color-neutral-0
+  ); /* Adapts to theme's base background (e.g., white in light, dark grey in dark) */
+  color: var(--sl-color-neutral-700, var(--sl-input-color)); /* Adapts to theme's default text color */
+  line-height: 1.5;
+}
+
+.container {
+  padding: 20px; /* Add padding to the container instead of body for full-bleed background */
+  max-width: 100%; /* Or your preferred max-width */
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  /* Use a theme-aware color for the main heading */
+  color: var(--sl-color-neutral-900); /* Dark in light, lighter in dark */
+}
+
+.controls {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+  gap: 20px; /* Space between lists */
+  overflow-x: auto; /* Allow horizontal scrolling for many lists */
+  padding-bottom: 20px; /* Space for scrollbar */
+}
+
+.list {
+  /* Use Shoelace variables for a theme-aware background */
+  background-color: var(--sl-color-neutral-100); /* Slightly off-base background */
+  border-radius: var(--sl-border-radius-large); /* Use Shoelace border-radius variable */
+  padding: 10px;
+  width: 300px; /* Fixed width for lists */
+  flex-shrink: 0; /* Prevent lists from shrinking */
+  box-shadow: var(--sl-shadow-medium); /* Use Shoelace shadow variable */
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  /* Text color for list name will be inherited or set by .list-name */
+  color: var(--sl-color-neutral-800); /* Ensure header text is readable */
+}
+
+.list-name {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.cards-container {
+  min-height: 100px; /* Minimum height for drop zone */
+  /* Use a slightly different shade from the list background, also theme-aware */
+  background-color: var(
+    --sl-color-neutral-50
+  ); /* Even lighter than the list, or var(--sl-color-neutral-200) in dark mode if list is 100 */
+  border-radius: var(--sl-border-radius-medium);
+  padding: 5px;
+}
+
+/* Shoelace card styling */
+sl-card {
+  width: calc(100% - 3px);
+  margin: 0 0 10px 0;
+  border-radius: var(--sl-border-radius-medium);
+  margin-bottom: 10px;
+  cursor: grab;
+}
+
+/*
+sl-card::part(base) {
+     You can customize Shoelace parts here if needed
+}
+*/
+
+.card-actions sl-icon-button {
+  font-size: 0.9em;
+}
+
+/* Add these styles to /home/dev/code/forge/public/css/style.css */
+
+/* Chat Drawer Styling */
+.chat-drawer::part(body) {
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Remove default body padding to use full height for flex layout */
+  overflow: hidden; /* Prevent body itself from scrolling, messages container will scroll */
+}
+
+/* optional 
+.chat-drawer::part(header) {
+  
+}
+
+.chat-drawer::part(footer) {
+  
+}
+*/
+.chat-messages-container {
+  flex-grow: 1; /* Takes up available vertical space */
+  overflow-y: auto; /* Allows scrolling for messages */
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Space between message bubbles */
+}
+
+.chat-message {
+  display: flex;
+  align-items: flex-start; /* Aligns avatar with the top of the text block */
+  max-width: 85%;
+  gap: 0.75rem; /* Space between avatar and message content */
+}
+
+.chat-message .message-content {
+  padding: 0.6rem 1rem;
+  border-radius: 18px;
+  line-height: 1.45;
+  word-wrap: break-word; /* Ensure long words break */
+  box-shadow: var(--sl-shadow-x-small);
+}
+
+/* Assistant (AI) Messages */
+.assistant-message {
+  align-self: flex-start; /* Aligns the whole message block to the left */
+}
+
+.assistant-message sl-avatar {
+  color: var(--sl-color-primary-text);
+  background-color: var(--sl-color-primary-200);
+}
+
+.assistant-message .message-content {
+  background-color: var(--sl-color-neutral-100);
+  color: var(--sl-color-neutral-800);
+  border-bottom-left-radius: 6px; /* "Tail" effect */
+}
+
+/* User Messages */
+.user-message {
+  align-self: flex-end; /* Aligns the whole message block to the right */
+  flex-direction: row-reverse; /* Avatar appears on the right of the bubble */
+}
+
+.user-message sl-avatar {
+  color: var(--sl-color-neutral-0);
+  background-color: var(--sl-color-success-500);
+}
+
+.user-message .message-content {
+  background-color: var(--sl-color-primary-600);
+  color: var(--sl-color-neutral-0);
+  border-bottom-right-radius: 6px; /* "Tail" effect */
+}
+
+/* Chat Input Area */
+.chat-input-area {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--sl-color-neutral-200);
+  background-color: var(--sl-color-neutral-0);
+}
+
+#chat-input {
+  flex-grow: 1;
+}
+
+#chat-input::part(base) {
+  /* Ensure textarea doesn't grow too tall initially */
+  min-height: calc(1.5em + var(--sl-input-spacing-small) * 2 + var(--sl-input-border-width) * 2);
+}
+
+#send-chat-message-button {
+  font-size: 1.2rem;
+  margin-right: 15px; /* Add space to the right of the send button */
+}
+
+/* Drawer Grid */
+.settings-grid {
+  display: grid;
+  /*
+    This creates responsive columns:
+    - It will fit as many columns as possible.
+    - Each column will be at least 200px wide.
+    - Columns will share available space equally (1fr).
+  */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem; /* Adjust spacing between items */
+  padding: 1rem; /* Add some padding inside the drawer content area */
+}
+
+/*
+.setting-item {
+}
+*/
+
+.static-rainbow-text {
+  background-image: linear-gradient(
+    to right,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red
+  );
+  -webkit-background-clip: text; /* For Safari/Chrome */
+  background-clip: text;
+  color: transparent; /* Makes the text color transparent so the background shows through */
+  font-weight: bold; /* Optional: makes the effect more pronounced */
+}
+
+@keyframes rainbow-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-rainbow-text {
+  background: linear-gradient(
+    to right,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red,
+    violet,
+    indigo,
+    blue,
+    green,
+    yellow,
+    orange,
+    red /* Repeat for seamless animation */
+  );
+  background-size: 200% auto; /* Make the background wider than the text */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold; /* Optional */
+  animation: rainbow-shimmer 5s linear infinite;
+}
+
+/* Responsive Header Styles */
+#hamburger-menu {
+  display: none; /* Hidden by default, shown via media query */
+  /* font-size is set inline, but could be here */
+}
+
+#responsive-header-drawer {
+  --size: 280px; /* Adjust drawer width as needed */
+}
+
+/* Styling for the new static menu container in the responsive drawer */
+.drawer-menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Space between items in the drawer */
+  padding: 1rem; /* Padding inside the drawer */
+}
+
+.drawer-menu-container .drawer-menu-item {
+  /* Ensure buttons take full width if desired, or adjust alignment */
+  /* The `fullWidth` attribute on sl-button might handle this,
+     but you can add more specific styling here if needed. */
+  justify-content: flex-start; /* Aligns icon and text to the left for button */
+  text-align: left;
+}
+
+#responsive-header-drawer .drawer-controls-container #add-list-form-container sl-input,
+#responsive-header-drawer .drawer-controls-container #add-list-form-container sl-button {
+  width: 100%; /* Ensure input and button are full-width within their container */
+}
+
+/* Media Query for small screens */
+@media (max-width: 899px) {
+  /* Hide the standard header controls container */
+  #main-header-controls {
+    display: none !important; /* Override inline style */
+  }
+  /* Show the hamburger menu */
+  #hamburger-menu {
+    display: inline-flex; /* Or 'block' or 'flex' as appropriate */
+  }
+}
+
+/* On larger screens, the default display for #main-header-controls (flex) and #hamburger-menu (none) will apply.
+   No explicit @media (min-width: 900px) is strictly needed for these display properties if defaults are correct,
+   but it can be added for clarity or to override other potential styles. */
