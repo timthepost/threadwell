@@ -105,7 +105,7 @@ export function getDefaultBoardState(): BoardState {
         isAIComponent: true,
         title: "Document Search",
         description:
-          "Search and ask questions about your text-based knowledge stores using a local model",
+          "Point me at a bunch of documents and ask me questions about them!",
       },
     },
     config: {
