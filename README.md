@@ -1,7 +1,8 @@
 # Threadwell
 
-A well of threads, or a way to manage AI assistant sessions and tasks that "threads well" (as the original
-concept started), which can also be an initial chat UI - this was that!
+A well of threads, or a way to manage AI assistant sessions as tasks that "threads well" (as the original
+concept started), which can also be an initial chat UI - this was that! And, well, who doesn't like a 
+KanBan board to delegate and stay organized?
 
 This is a basic kanban-style interface built using Oak, Shoelace and Sortable JS. Oak provides the perfect
 background for an API-driven board and task state, Shoelace components provide a pleasing work-friendly UI
@@ -19,8 +20,7 @@ The starter "default" cards that become available from the first run (defined in
   the card. Ask follow up questions or archive it, up to you.
 
 - **Interactive Chat**:\
-  A chat between you and Runa. Attach files for context if you want, and kick off the conversation. It won't
-  be a daisy-chain of card updates, but more like a DM conversation. You can mention it for context later.
+ Just ... open the assistant chat (chat bubble, bottom-right).
 
 - **Task**:\
   Do research, write code, write content, search the web, translate things, or whatever other capabilities you
