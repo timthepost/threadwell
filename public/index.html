@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-    <title>Ops Center</title>
+    <title>Threadwell</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css"
@@ -40,7 +40,7 @@
             label="Menu"
             style="font-size: 1.5rem; margin-right: 0.5rem"
           ></sl-icon-button>
-          <h1>Board Name</h1>
+          <h1>Hello!</h1>
         </div>
 
         <!-- Group 2: All controls aligned to the right -->
@@ -122,7 +122,7 @@
           <!-- You can add more items and sl-dividers here -->
         </div>
       </sl-drawer>
-      
+
       <sl-drawer
         id="settings-drawer"
         label="Board Settings"
@@ -175,38 +175,29 @@
       <sl-button slot="footer" variant="primary" id="drawer-save-add-column-button">Add Column</sl-button>
     </sl-dialog>
 
-    <!-- Placeholder dialog for "Go to Board" from drawer -->
-    <sl-dialog id="drawer-go-to-board-dialog" label="Go to Board">Select a board (placeholder).</sl-dialog>
     <!-- App Assistant Chat Toggle Button -->
     <div id="chat-toggle-container" style="position: fixed; bottom: 20px; right: 20px; z-index: 650">
-      <sl-tooltip content="App Support">
+      <sl-tooltip content="Assistant">
         <sl-icon-button
           id="toggle-chat-button"
-          name="life-preserver"
-          label="App Support"
+          name="chat-right-dots"
+          label="Assistant"
           style="font-size: 2.2rem; --size: 3.5rem"
         ></sl-icon-button>
       </sl-tooltip>
     </div>
 
     <!-- App Assistant Chat Drawer -->
-    <sl-drawer id="chat-drawer" label="App Support" placement="end" class="chat-drawer">
+    <sl-drawer id="chat-drawer" label="Assistant" placement="end" class="chat-drawer">
       <div class="chat-messages-container">
         <!-- Mock messages will be populated here by JS or can be hardcoded for v0 -->
         <div class="chat-message assistant-message">
           <sl-avatar initials="AI" shape="circle"></sl-avatar>
-          <div class="message-content">Hello! How can I assist you with using this application today?</div>
-        </div>
-        <div class="chat-message user-message">
-          <div class="message-content">I'm looking to create a new agent.</div>
-          <sl-avatar initials="ME" shape="circle"></sl-avatar>
+          <div class="message-content">Hello! This is where you'd talk to your main assistant about everything it has been trained to help with.</div>
         </div>
         <div class="chat-message assistant-message">
           <sl-avatar initials="AI" shape="circle"></sl-avatar>
-          <div class="message-content">
-            Great! You can use the "Agent Controls" drawer at the top of the page to add a new agent. What
-            would you like to name them?
-          </div>
+          <div class="message-content">Right now, I just repeat back what you say until I get hooked up to a runtime.</div>
         </div>
       </div>
       <div slot="footer" class="chat-input-area">
