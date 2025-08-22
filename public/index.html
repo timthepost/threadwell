@@ -50,30 +50,7 @@
             <sl-input id="new-list-name" placeholder="Column Name" clearable></sl-input>
             <sl-button id="add-list-button" variant="primary">Add Column</sl-button>
           </div>
-          <!-- Board Switcher / Combo Search -->
-          <sl-select id="goToBoard" placeholder="Go to board" clearable style="min-width: 220px">
-            <sl-input
-              slot="header"
-              placeholder="Search boards..."
-              id="boardSearchInput"
-              clearable
-              style="margin-bottom: var(--sl-spacing-x-small)"
-            ></sl-input>
-            <sl-option value="board1">Board 1: Project Alpha</sl-option>
-            <sl-option value="board2">Board 2: Marketing Campaign</sl-option>
-            <sl-option value="board3">Board 3: Development Sprint</sl-option> <sl-option value="board4"
-            >Board 4: Personal Tasks Q3</sl-option> <sl-option value="board5"
-            >Board 5: Client Onboarding</sl-option>
-          </sl-select>
           <!-- Wrapper for right-side icons -->
-          <sl-tooltip content="Invite & Share">
-            <sl-icon-button
-              id="open-sharing-drawer-button"
-              name="person-plus"
-              label="Agent Controls"
-              style="font-size: 1.5rem"
-            ></sl-icon-button>
-          </sl-tooltip>
           <sl-tooltip content="Board Settings">
             <sl-icon-button
               id="open-settings-drawer-button"
@@ -117,20 +94,7 @@
               ></sl-icon-button>
               <sl-menu id="account-menu">
                 <sl-menu-item>Messages</sl-menu-item>
-                <sl-menu-item>Account Settings</sl-menu-item>
-                <sl-menu-item>Organization Settings</sl-menu-item>
-                <sl-divider></sl-divider>
-                <!-- Removed sl-menu-item wrapper for the select -->
-                <div
-                  style="padding: var(--sl-spacing-x-small) var(--sl-spacing-medium); display: flex; align-items: center"
-                >
-                  <sl-select placeholder="Select User To Become" id="user-selector" style="width: 100%">
-                    <sl-option value="1">System Admin User</sl-option>
-                    <sl-option value="2">Standard User</sl-option>
-                    <sl-option value="org-admin">Organization Admin</sl-option>
-                    <sl-option value="outside-agent">Outside Agent</sl-option>
-                  </sl-select>
-                </div>
+                <sl-menu-item>Preferences</sl-menu-item>
                 <sl-divider></sl-divider>
                 <sl-menu-item>Sign Out</sl-menu-item>
               </sl-menu>
@@ -148,9 +112,6 @@
             <sl-icon slot="prefix" name="columns-gap"></sl-icon>Go to Board
           </sl-button>
           <sl-divider></sl-divider>
-          <sl-button id="drawer-invite-share" class="drawer-menu-item" outline fullWidth>
-            <sl-icon slot="prefix" name="person-plus"></sl-icon>Invite & Share
-          </sl-button>
           <sl-button id="drawer-board-settings" class="drawer-menu-item" outline fullWidth>
             <sl-icon slot="prefix" name="gear"></sl-icon>Board Settings
           </sl-button>
@@ -161,28 +122,7 @@
           <!-- You can add more items and sl-dividers here -->
         </div>
       </sl-drawer>
-
-      <sl-drawer
-        id="sharing-drawer"
-        label="Manage Sharing"
-        placement="top"
-        class="controls-drawer"
-        style="--size: 15rem"
-      >
-        <div style="display: flex; flex-direction: row; gap: 1rem; padding: 1rem; height: auto">
-          <sl-input id="new-agent-list-name" placeholder="New agent name..."></sl-input>
-          <sl-button id="add-agent-list-button" variant="primary" style="width: 100%"
-          >Add Agent To Board</sl-button>
-
-          <sl-divider vertical></sl-divider>
-
-          <sl-input id="invite-teammate-name" placeholder="Teammate Email"></sl-input>
-          <sl-button id="invite-teammate-button" variant="primary" style="width: 100%"
-          >Invite Teammate To Board</sl-button>
-        </div>
-        <sl-button slot="footer" variant="neutral" id="close-sharing-drawer-button">Close</sl-button>
-      </sl-drawer>
-
+      
       <sl-drawer
         id="settings-drawer"
         label="Board Settings"

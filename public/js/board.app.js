@@ -4,8 +4,6 @@ const boardContainer = document.getElementById("board-container");
 // things that trigger list creation
 const addListButton = document.getElementById("add-list-button");
 const newListInput = document.getElementById("new-list-name");
-const addAgentListButton = document.getElementById("add-agent-list-button");
-const newAgentListInput = document.getElementById("new-agent-list-name");
 
 // things that go into card creation
 const cardDialog = document.getElementById("card-dialog");
@@ -230,22 +228,6 @@ addListButton.addEventListener("click", () => {
   const listName = newListInput.value.trim();
   if (!listName) {
     alert("Please enter a list name.");
-    return;
-  }
-
-  const newListId = crypto.randomUUID();
-  boardState.lists[newListId] = { id: newListId, name: listName, cardIds: [] };
-  boardState.listOrder.push(newListId);
-
-  newListInput.value = "";
-  saveCurrentBoardState();
-  renderBoard(); // Re-render to add the new list
-});
-
-addAgentListButton.addEventListener("click", () => {
-  const listName = newAgentListInput.value.trim();
-  if (!listName) {
-    alert("Please enter ah agent name.");
     return;
   }
 
@@ -569,7 +551,7 @@ async function initializeResponsiveHeader() { // Make the function async
   }
 
   const updateHeaderLayout = () => {
-    const isSmallScreen = window.innerWidth < 900;
+    const isSmallScreen = globalThis.innerWidth < 900;
     if (!isSmallScreen) {
       responsiveHeaderDrawer.hide(); // Always hide drawer on large screens
     }
@@ -581,7 +563,6 @@ async function initializeResponsiveHeader() { // Make the function async
   // Event listeners for items inside the responsive drawer
   const drawerAddColumnButton = document.getElementById("drawer-add-column");
   const drawerGoToBoardButton = document.getElementById("drawer-go-to-board");
-  const drawerInviteShareButton = document.getElementById("drawer-invite-share");
   const drawerBoardSettingsButton = document.getElementById("drawer-board-settings");
   const drawerThemeSettingsButton = document.getElementById("drawer-theme-settings");
   const drawerAccountSettingsButton = document.getElementById("drawer-account-settings");
@@ -591,7 +572,6 @@ async function initializeResponsiveHeader() { // Make the function async
   const drawerNewColumnNameInput = document.getElementById("drawer-new-column-name-input");
   const drawerSaveAddColumnButton = document.getElementById("drawer-save-add-column-button");
   const drawerCancelAddColumnButton = document.getElementById("drawer-cancel-add-column-button");
-  const drawerGoToBoardDialog = document.getElementById("drawer-go-to-board-dialog");
 
   if (drawerAddColumnButton && drawerAddColumnDialog) {
     drawerAddColumnButton.addEventListener("click", () => {
@@ -626,20 +606,8 @@ async function initializeResponsiveHeader() { // Make the function async
     });
   }
 
-  if (drawerGoToBoardButton && drawerGoToBoardDialog) {
-    drawerGoToBoardButton.addEventListener("click", () => {
-      responsiveHeaderDrawer.hide();
-      drawerGoToBoardDialog.show(); // Placeholder action
-    });
-  }
-
   // Trigger existing controls for other drawer items
-  if (drawerInviteShareButton) {
-    drawerInviteShareButton.addEventListener("click", () => {
-      responsiveHeaderDrawer.hide();
-      document.getElementById("open-sharing-drawer-button")?.click();
-    });
-  }
+
   if (drawerBoardSettingsButton) {
     drawerBoardSettingsButton.addEventListener("click", () => {
       responsiveHeaderDrawer.hide();
@@ -665,21 +633,8 @@ async function initializeResponsiveHeader() { // Make the function async
 
 // Initial load
 onDOMLoaded(async () => {
-  const controlsDrawer = document.getElementById("sharing-drawer");
-  const settingsDrawer = document.getElementById("settings-drawer");
-
-  const openControlsDrawerButton = document.getElementById("open-sharing-drawer-button");
   const openSettingsDrawerButton = document.getElementById("open-settings-drawer-button");
-
-  const closeControlsDrawerButton = document.getElementById("close-sharing-drawer-button");
   const closeSettingsDrawerButton = document.getElementById("close-settings-drawer-button");
-
-  openControlsDrawerButton.addEventListener("click", () => {
-    controlsDrawer.show();
-    closeControlsDrawerButton.addEventListener("click", () => {
-      controlsDrawer.hide();
-    });
-  });
 
   openSettingsDrawerButton.addEventListener("click", () => {
     settingsDrawer.show();
