@@ -1,6 +1,6 @@
 # Threadwell
 
-A well of threads, or a way to manage AI assistant sessions as tasks, in a way thatalso "threads well" (as the original
+A well of threads, or a way to manage AI assistant sessions as tasks, in a way that also "threads well" (as the original
 concept started), which can also be an initial chat UI - this was that! And, well, who doesn't like a 
 KanBan board to delegate and stay organized?
 
