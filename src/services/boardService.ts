@@ -25,6 +25,14 @@ export function closeKvStore(): void {
   }
 }
 
+// This populates a "demo" board state to show one possible use where:
+// One column where AI is expected to complete every card in it, like a todo
+// One column where AI only helps in parts of the workflow
+// One column where AI doesn't monitor (but is still accessible via boardService)
+// aiComponent = Expected to get queued in bulk and dispatched, monitors for activity on the whole card
+// vaiComponent = work gets dispatched surgically, runa is told what to monitor after doing them
+// Still very much in design - this isn't an "end product", it's more a way to test as many things in one
+// place while still being useful.
 export function getDefaultBoardState(): BoardState {
   const cardId1 = crypto.randomUUID();
   const cardId2 = crypto.randomUUID();
@@ -37,25 +45,31 @@ export function getDefaultBoardState(): BoardState {
 
   return {
     lists: {
+      // Assistant does everything in the assigned tasks, updates them
+      // with completion and notes
       [listId1]: {
         id: listId1,
-        name: "Runa",
+        name: "Assistant TODO",
         cardIds: [cardId3, cardId1, cardId2],
         allowsAIComponent: true,
         allowsVAIComponent: true,
         isPermanent: true,
       },
+      // Assistant only does some pre-defined parts of workflow, or is 
+      // triggered by certain actions in workflow or workflow outcomes
       [listId2]: {
         id: listId2,
-        name: "Ima Setter",
+        name: "AI Co-Workflows",
         cardIds: [cardId5],
         allowsAIComponent: false,
         allowsVAIComponent: true,
         isPermanent: false,
       },
+      // No automatic dispatch to Runa on events - just a regular ole' 
+      // list / card system. 
       [listId3]: {
         id: listId3,
-        name: "Regular Column (No AI)",
+        name: "KanBan List (No AI)",
         cardIds: [cardId4],
         allowsAIComponent: false,
         allowsVAIComponent: false,
@@ -99,15 +113,15 @@ export function getDefaultBoardState(): BoardState {
         id: cardId4,
         isAIComponent: false,
         isVAIComponent: false,
-        title: "Schedule Appointment",
+        title: "Sanitize Data",
         description:
-          "Pre-made task templates for contractors / temps that leverage AI for context, instructions, speaking and draft suggestions and questions.",
+          "Pre-made task templates where AI is expected to only do some of the work instead of all of it.",
       },
     },
     config: {
       ownerId: crypto.randomUUID(),
-      title: "Forge",
-      description: "Forge Dev Board",
+      title: "Threadwell",
+      description: "Threadwell Demo Board",
     },
   };
 }
@@ -135,8 +149,7 @@ export async function deleteColumnFromBoard(listIdToDelete: string): Promise<voi
   // Check if the list to delete actually exists
   if (!lists[listIdToDelete]) {
     console.warn(`List with ID "${listIdToDelete}" not found for deletion.`);
-    // Optionally, you could throw an error here to be caught by the API layer
-    // and return a 404 Not Found response.
+    // should probably throw here so the API layer communicates it back.
     // For now, we'll proceed silently if the list doesn't exist,
     // effectively making the operation idempotent for non-existent lists.
     return;
@@ -163,4 +176,5 @@ export async function deleteColumnFromBoard(listIdToDelete: string): Promise<voi
   };
 
   await saveBoardState(newBoardState);
+  // todo: use Tieto here as a board object store (no need for DenoKV / SQLite3)
 }
