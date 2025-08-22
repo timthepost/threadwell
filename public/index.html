@@ -51,16 +51,9 @@
             <sl-button id="add-list-button" variant="primary">Add Column</sl-button>
           </div>
           <!-- Wrapper for right-side icons -->
-          <sl-tooltip content="Board Settings">
-            <sl-icon-button
-              id="open-settings-drawer-button"
-              name="gear"
-              label="Board Settings"
-              style="font-size: 1.5rem; margin-right: 0"
-            ></sl-icon-button>
-          </sl-tooltip>
           <sl-tooltip content="Theme Settings">
             <sl-dropdown id="theme-selector-dropdown">
+              <sl-divider></sl-divider>
               <sl-icon-button
                 slot="trigger"
                 name="palette"
@@ -93,10 +86,9 @@
                 style="font-size: 1.5rem"
               ></sl-icon-button>
               <sl-menu id="account-menu">
-                <sl-menu-item>Messages</sl-menu-item>
-                <sl-menu-item>Preferences</sl-menu-item>
                 <sl-divider></sl-divider>
-                <sl-menu-item>Sign Out</sl-menu-item>
+                <sl-menu-item>Board Settings</sl-menu-item>
+                <sl-menu-item>User Preferences</sl-menu-item>
               </sl-menu>
             </sl-dropdown>
           </sl-tooltip>
@@ -112,43 +104,11 @@
             <sl-icon slot="prefix" name="columns-gap"></sl-icon>Go to Board
           </sl-button>
           <sl-divider></sl-divider>
-          <sl-button id="drawer-board-settings" class="drawer-menu-item" outline fullWidth>
-            <sl-icon slot="prefix" name="gear"></sl-icon>Board Settings
-          </sl-button>
-          <sl-divider></sl-divider>
           <sl-button id="drawer-account-settings" class="drawer-menu-item" outline fullWidth>
             <sl-icon slot="prefix" name="person-circle"></sl-icon>Account
           </sl-button>
           <!-- You can add more items and sl-dividers here -->
         </div>
-      </sl-drawer>
-
-      <sl-drawer
-        id="settings-drawer"
-        label="Board Settings"
-        placement="top"
-        class="settings-drawer"
-        style="--size: 20rem"
-      >
-        <div class="settings-grid">
-          <div class="setting-item">
-            <sl-input label="Setting Alpha" placeholder="Enter value"></sl-input>
-          </div>
-          <div class="setting-item">
-            <sl-switch>Enable Beta Feature</sl-switch>
-          </div>
-          <div class="setting-item">
-            <sl-select label="Gamma Option" placeholder="Select one">
-              <sl-option value="1">Option 1</sl-option>
-              <sl-option value="2">Option 2</sl-option>
-            </sl-select>
-          </div>
-          <div class="setting-item">
-            <sl-range label="Delta Level" min="0" max="100" value="50"></sl-range>
-          </div>
-          <!-- Add more setting items as needed -->
-        </div>
-        <sl-button slot="footer" variant="neutral" id="close-settings-drawer-button">Close</sl-button>
       </sl-drawer>
 
       <div id="board-container" class="board">

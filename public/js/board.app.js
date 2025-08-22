@@ -562,7 +562,6 @@ async function initializeResponsiveHeader() { // Make the function async
 
   // Event listeners for items inside the responsive drawer
   const drawerAddColumnButton = document.getElementById("drawer-add-column");
-  const drawerBoardSettingsButton = document.getElementById("drawer-board-settings");
   const drawerThemeSettingsButton = document.getElementById("drawer-theme-settings");
   const drawerAccountSettingsButton = document.getElementById("drawer-account-settings");
 
@@ -606,13 +605,6 @@ async function initializeResponsiveHeader() { // Make the function async
   }
 
   // Trigger existing controls for other drawer items
-
-  if (drawerBoardSettingsButton) {
-    drawerBoardSettingsButton.addEventListener("click", () => {
-      responsiveHeaderDrawer.hide();
-      document.getElementById("open-settings-drawer-button")?.click();
-    });
-  }
   if (drawerThemeSettingsButton) {
     drawerThemeSettingsButton.addEventListener("click", () => {
       responsiveHeaderDrawer.hide();
@@ -632,16 +624,6 @@ async function initializeResponsiveHeader() { // Make the function async
 
 // Initial load
 onDOMLoaded(async () => {
-  const openSettingsDrawerButton = document.getElementById("open-settings-drawer-button");
-  const closeSettingsDrawerButton = document.getElementById("close-settings-drawer-button");
-
-  openSettingsDrawerButton.addEventListener("click", () => {
-    settingsDrawer.show();
-    closeSettingsDrawerButton.addEventListener("click", () => {
-      settingsDrawer.hide();
-    });
-  });
-
   const chatToggleButton = document.getElementById("toggle-chat-button");
   const chatDrawerElement = document.getElementById("chat-drawer");
   const chatInputElement = document.getElementById("chat-input");
