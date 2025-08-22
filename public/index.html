@@ -47,8 +47,12 @@
         <div id="main-header-controls" style="display: flex; align-items: center; gap: 1rem">
           <!-- Add List Form -->
           <div id="add-list-form-container" style="display: flex; align-items: center; gap: 0.5rem">
-            <sl-input id="new-list-name" placeholder="Column Name" clearable></sl-input>
-            <sl-button id="add-list-button" variant="primary">Add Column</sl-button>
+            <sl-input id="new-list-name" placeholder="List Name" clearable></sl-input>
+            <sl-button id="add-list-button" variant="primary">Add Regular List</sl-button>
+            <!-- Not yet implemented 
+            &mdash; Or &mdash;
+            <sl-button id="add-ai-list-button" variant="primary">Add Smart List</sl-button>
+            -->
           </div>
           <!-- Wrapper for right-side icons -->
           <sl-tooltip content="Theme Settings">
@@ -56,7 +60,7 @@
               <sl-divider></sl-divider>
               <sl-icon-button
                 slot="trigger"
-                name="palette"
+                name="display"
                 label="Change Theme"
                 style="font-size: 1.5rem"
               ></sl-icon-button>
@@ -71,7 +75,7 @@
                 </sl-menu-item>
                 <sl-menu-item type="checkbox" value="system">
                   <!-- JS will handle initial 'checked' state -->
-                  <sl-icon slot="prefix" name="display"></sl-icon>
+                  <sl-icon slot="prefix" name="pc-display"></sl-icon>
                   System
                 </sl-menu-item>
               </sl-menu>
