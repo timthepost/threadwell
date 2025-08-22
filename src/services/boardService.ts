@@ -39,9 +39,9 @@ export function getDefaultBoardState(): BoardState {
   const cardId3 = crypto.randomUUID();
   const cardId4 = crypto.randomUUID();
   const cardId5 = crypto.randomUUID();
+  const cardId6 = crypto.randomUUID();
   const listId1 = crypto.randomUUID();
   const listId2 = crypto.randomUUID();
-  const listId3 = crypto.randomUUID();
 
   return {
     lists: {
@@ -49,73 +49,63 @@ export function getDefaultBoardState(): BoardState {
       // with completion and notes
       [listId1]: {
         id: listId1,
-        name: "Assistant TODO",
-        cardIds: [cardId3, cardId1, cardId2],
+        name: "Augmented Tasks",
+        cardIds: [cardId6, cardId3, cardId1, cardId2],
         allowsAIComponent: true,
-        allowsVAIComponent: true,
         isPermanent: true,
-      },
-      // Assistant only does some pre-defined parts of workflow, or is 
-      // triggered by certain actions in workflow or workflow outcomes
-      [listId2]: {
-        id: listId2,
-        name: "AI Co-Workflows",
-        cardIds: [cardId5],
-        allowsAIComponent: false,
-        allowsVAIComponent: true,
-        isPermanent: false,
       },
       // No automatic dispatch to Runa on events - just a regular ole' 
       // list / card system. 
-      [listId3]: {
-        id: listId3,
-        name: "KanBan List (No AI)",
+      [listId2]: {
+        id: listId2,
+        name: "Regular List (No AI)",
         cardIds: [cardId4],
         allowsAIComponent: false,
-        allowsVAIComponent: false,
         isPermanent: false,
       },
     },
-    listOrder: [listId1, listId2, listId3],
+    listOrder: [listId1, listId2],
     cards: {
       [cardId1]: {
         id: cardId1,
-        isAIComponent: false,
-        isVAIComponent: true,
-        title: "DNS Change Request",
+        isAIComponent: true,
+        title: "Extract And Translate",
         description:
-          "Determine client hosting company from domain; generate instructions for how to update DNS based on their control panel. Monitor their DNS settings for updates and notify when ready.",
+          "Extract all text from PDFs and translate into English, Markdown format.",
       },
       [cardId2]: {
         id: cardId2,
         isAIComponent: false,
-        isVAIComponent: true,
         title: "Email Draft",
         description:
-          "I can use all the context I know about your clients to help you draft tricky emails to them.",
+          "Research this company and help me draft a cold cover letter.",
       },
       [cardId3]: {
         id: cardId3,
         isAIComponent: false,
-        isVAIComponent: true,
-        title: "Long Term Chat",
+        title: "News Summarization",
         description:
-          "I won't forget any of the chats we have in this special chat card; they'll become context for future chats.",
+          "Blend and summarize my news feed from RSS feeds provided below:",
       },
       [cardId4]: {
         id: cardId4,
         isAIComponent: false,
-        isVAIComponent: false,
         title: "My Personal To Do",
         description: "Basic KanBan Board Functionality Is Here Too!",
       },
       [cardId5]: {
-        id: cardId4,
+        id: cardId5,
         isAIComponent: false,
-        isVAIComponent: false,
-        title: "Sanitize Data",
+        title: "Cooperative Workflow",
         description:
           "Pre-made task templates where AI is expected to only do some of the work instead of all of it.",
+      },
+      [cardId6]: {
+        id: cardId6,
+        isAIComponent: true,
+        title: "Document Search",
+        description:
+          "Search and ask questions about your text-based knowledge stores using a local model",
       },
     },
     config: {

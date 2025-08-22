@@ -562,7 +562,6 @@ async function initializeResponsiveHeader() { // Make the function async
 
   // Event listeners for items inside the responsive drawer
   const drawerAddColumnButton = document.getElementById("drawer-add-column");
-  const drawerGoToBoardButton = document.getElementById("drawer-go-to-board");
   const drawerBoardSettingsButton = document.getElementById("drawer-board-settings");
   const drawerThemeSettingsButton = document.getElementById("drawer-theme-settings");
   const drawerAccountSettingsButton = document.getElementById("drawer-account-settings");
