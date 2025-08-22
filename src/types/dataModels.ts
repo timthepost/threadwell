@@ -2,7 +2,7 @@ export interface Card {
   id: string;
   title: string;
   description: string;
-  isVAIComponent: boolean;
+  // Does it export objects Runa should monitor?
   isAIComponent: boolean;
 }
 
@@ -10,7 +10,6 @@ export interface List {
   id: string;
   name: string;
   cardIds: string[]; // Ordered array of card IDs belonging to this list
-  allowsVAIComponent: boolean; // allows VAIComponent
   allowsAIComponent: boolean; // allows AI components
   isPermanent: boolean; // list is permanent, can not be deleted, even if empty.
 }
