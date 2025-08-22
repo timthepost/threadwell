@@ -38,6 +38,12 @@ It also has a hard-coded "default" board so there's something on the first run.
 The structures for it live in `types/` and are commented inline, and the client code is in `public/` and is
 just Shoelace + JS to keep it framework agnostic and as free of third-party dependencies as possible.
 
+## TODO:
+
+ - Splinter bus integration (priority)
+ - Export board state to Tieto?
+ - We need more basic kanban / app creature comforts, even though this isn't supposed to be an end product.
+
 ## Security Notice
 
 This does have outside dependencies, so note that specific versions of dependencies are specified in the hopes
