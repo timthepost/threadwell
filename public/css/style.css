@@ -221,12 +221,12 @@ sl-card::part(base) {
   background-image: linear-gradient(
     to right,
     violet,
-    indigo,
     blue,
-    green,
-    yellow,
-    orange,
-    red
+    indigo,
+    violet,
+    blue,
+    violet,
+    blue
   );
   -webkit-background-clip: text; /* For Safari/Chrome */
   background-clip: text;
@@ -252,17 +252,12 @@ sl-card::part(base) {
     violet,
     indigo,
     blue,
-    green,
-    yellow,
-    orange,
-    red,
     violet,
     indigo,
     blue,
-    green,
-    yellow,
-    orange,
-    red /* Repeat for seamless animation */
+    violet,
+    blue
+/* Repeat for seamless animation */
   );
   background-size: 200% auto; /* Make the background wider than the text */
   -webkit-background-clip: text;
