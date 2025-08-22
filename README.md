@@ -46,15 +46,18 @@ just Shoelace + JS to keep it framework agnostic and as free of third-party depe
 
 ## Security Notice
 
-This does have outside dependencies, so note that specific versions of dependencies are specified in the hopes
-that their releases remain immutable. However, care should be taken when upgrading any of them or adding more
-to be aware that a potential hole for dependency injection does open, especially for any NPM-resolved
-packages, like Sortable, which is especially popular and thus a high-prized target by bad actors.
+Unlike most other components developed alongside / for Runa, This does have outside dependencies, so note that 
+specific versions of dependencies are specified in the hopes that their releases remain immutable. However, 
+care should be taken when upgrading any of them or adding more to be aware that a potential hole for dependency 
+injection does open, especially for any NPM-resolved packages, like Sortable, which is especially popular and 
+thus a high-prized target by bad actors.
 
 Even with the back-end capable of using the message bus, Deno needs access to the outside world in order for
 this configuration to be useful, so allowing network access is rather necessary.
 
-Understand how this affects your security profile overall, and proceed with sensible caution.
+Understand how this affects your security profile overall, and proceed with sensible caution. This affects 
+those who intend to use local models in order to process very confidential (e.g. medical) data, or companies
+that need to process docs without a SOC impact to their terms or privacy policy due to vendors.
 
 ## PRs and Improvements
 
