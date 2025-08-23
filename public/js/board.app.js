@@ -527,7 +527,7 @@ function initializeTheme(themeMenuEl) {
 
 // --- Responsive Header Functionality ---
 
-async function initializeResponsiveHeader() { // Make the function async
+async function initializeResponsiveHeader() {
   const hamburgerMenu = document.getElementById("hamburger-menu");
   const mainHeaderControls = document.getElementById("main-header-controls");
   const responsiveHeaderDrawer = document.getElementById("responsive-header-drawer");
@@ -555,7 +555,6 @@ async function initializeResponsiveHeader() { // Make the function async
     if (!isSmallScreen) {
       responsiveHeaderDrawer.hide(); // Always hide drawer on large screens
     }
-    // CSS media queries handle the visibility of hamburgerMenu and mainHeaderControls itself.
   };
 
   hamburgerMenu.addEventListener("click", () => responsiveHeaderDrawer.show());
@@ -573,8 +572,8 @@ async function initializeResponsiveHeader() { // Make the function async
 
   if (drawerAddColumnButton && drawerAddColumnDialog) {
     drawerAddColumnButton.addEventListener("click", () => {
-      responsiveHeaderDrawer.hide(); // Hide main drawer
-      drawerNewColumnNameInput.value = ""; // Clear input
+      responsiveHeaderDrawer.hide(); // Main drawer
+      drawerNewColumnNameInput.value = "";
       drawerAddColumnDialog.show();
     });
   }
@@ -672,7 +671,5 @@ onDOMLoaded(async () => {
 
   // --- Initial Board Load ---
   fetchBoardState();
-
-  // --- Initialize Responsive Header ---
-  await initializeResponsiveHeader(); // Await the async initialization
+  await initializeResponsiveHeader();
 });
