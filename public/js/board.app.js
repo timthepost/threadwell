@@ -54,7 +54,7 @@ function renderBoard() {
     const list = boardState.lists[listId];
     if (!list) return;
 
-    console.dir(list);
+    //console.dir(list);
     const listElement = document.createElement("div");
     listElement.className = "list";
     listElement.dataset.listId = list.id;
@@ -66,17 +66,8 @@ function renderBoard() {
     const listNameElement = document.createElement("h3");
     listNameElement.className = "list-name";
     const listNameString = list.name; // Use a variable for the name
-
-    // Condition from line 76: VAI Component and NOT Permanent
-    if (list.allowsVAIComponent === true && list.isPermanent === false) {
-      // Set innerHTML to include the list name and the styled superscript (Agent)
-      // Ensuring listNameString is treated as plain text here.
-      // If listNameString could contain HTML, it should be escaped or handled by creating text nodes.
-      listNameElement.innerHTML =
-        `${listNameString} <span class="static-rainbow-text">&nbsp;&nbsp;(+ AI)</span>`;
-    } // Condition from original line 73: AI Component and Permanent
-    else if (list.allowsAIComponent === true && list.isPermanent === true) {
-      listNameElement.innerHTML = listNameString + "&nbsp;&nbsp;(AI)";
+   
+    if (list.allowsAIComponent === true && list.isPermanent === true) {
       listNameElement.classList.add("static-rainbow-text");
     } else {
       // Default: just the list name
