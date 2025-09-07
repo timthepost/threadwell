@@ -68,6 +68,7 @@ function renderBoard() {
     const listNameString = list.name; // Use a variable for the name
    
     if (list.allowsAIComponent === true && list.isPermanent === true) {
+      listNameElement.innerHTML = listNameString;
       listNameElement.classList.add("static-rainbow-text");
     } else {
       // Default: just the list name
