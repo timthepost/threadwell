@@ -20,7 +20,7 @@ app.use(async (ctx, next) => {
 });
 
 // CORS for all routes
-app.use(oakCors()); // Allows all origins by default
+// app.use(oakCors()); // Allows all origins by default
 
 // API routes
 app.use(boardRouter.routes());
@@ -34,9 +34,7 @@ app.use(async (ctx) => {
   });
 });
 
-// Start listening only when the script is run directly
 if (import.meta.main) {
-  // You might want to use Deno.env.get("PORT") here for flexibility
   const port = 8000;
   console.log(`Server listening on http://localhost:${port}`);
   await app.listen({ port });
