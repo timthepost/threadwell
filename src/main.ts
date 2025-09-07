@@ -20,7 +20,7 @@ app.use(async (ctx, next) => {
 });
 
 // CORS for all routes
-// app.use(oakCors()); // Allows all origins by default
+app.use(oakCors()); // Allows all origins by default
 
 // API routes
 app.use(boardRouter.routes());
